@@ -14,6 +14,3 @@ USER jenkins-slave
 VOLUME /home/jenkins-slave
 
 ENTRYPOINT ["/usr/local/bin/jenkins-slave.sh"]
-
-# force help screen if no parameters are passed
-CMD ["-"]
