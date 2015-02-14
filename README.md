@@ -13,12 +13,15 @@ For a container with swarm plugin see
 
 To run a Docker container
 
-    docker run csanchez/jenkins-slave -jnlpUrl http://yourserver:port/computer/slave-name/slave-agent.jnlp -secret <long HEX string>
+    docker run csanchez/jenkins-slave -url http://jenkins-server:port <secret> <slave name>
 
-If the command line options are not set it will try to use environment variables
+If the command line options are not set it will try to use environment variables,
+including Kubernetes set variables for services `jenkins` and `jenkins-slave`.
 
-* `JENKINS_JNLP_URL`: url for the jnlp definition
-* `JENKINS_SECRET`: the secret key for authentication
+* `JENKINS_URL`: url for the Jenkins server
+* `JENKINS_SERVICE_HOST` and `JENKINS_SERVICE_PORT`: will be used to compose the url if the previous is not present.
+* `JENKINS_TUNNEL`: (`HOST:PORT`) connect to this slave host and port instead of Jenkins server
+* `JENKINS_SLAVE_SERVICE_HOST` and `JENKINS_SLAVE_SERVICE_PORT`: will be used to compose the tunnel argument if the previous is not present.
 
 
 # Building

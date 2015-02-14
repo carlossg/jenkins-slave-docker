@@ -10,14 +10,22 @@ if [[ $# -gt 1 ]]; then
 
   PARAMS=""
 
-  # if -url is not provided try env var
-  if [[ "$@" != *"-url "* ]] && [ ! -z "$JENKINS_URL" ]; then
-    PARAMS="$PARAMS -url $JENKINS_URL"
+  # if -url is not provided try env vars
+  if [[ "$@" != *"-url "* ]]; then
+    if [ ! -z "$JENKINS_URL" ]; then
+      PARAMS="$PARAMS -url $JENKINS_URL"
+    else if [ ! -z "$JENKINS_SERVICE_HOST" ] && [ ! -z "$JENKINS_SERVICE_PORT" ]; then
+      PARAMS="$PARAMS -url http://$JENKINS_SERVICE_HOST:$JENKINS_SERVICE_PORT"
+    fi
   fi
 
-  # if -tunnel is not provided try env var
-  if [[ "$@" != *"-tunnel "* ]] && [ ! -z "$JENKINS_TUNNEL" ]; then
-    PARAMS="$PARAMS -tunnel $JENKINS_TUNNEL"
+  # if -tunnel is not provided try env vars
+  if [[ "$@" != *"-tunnel "* ]]; then
+    if [ ! -z "$JENKINS_TUNNEL" ]; then
+      PARAMS="$PARAMS -tunnel $JENKINS_TUNNEL"
+    else if [ ! -z "$JENKINS_SLAVE_SERVICE_HOST" ] && [ ! -z "$JENKINS_SLAVE_SERVICE_PORT" ]; then
+      PARAMS="$PARAMS -tunnel $JENKINS_SLAVE_SERVICE_HOST:$JENKINS_SLAVE_SERVICE_PORT"
+    fi
   fi
 
   echo Running java $JAVA_OPTS -jar $JAR $PARAMS "$@"
