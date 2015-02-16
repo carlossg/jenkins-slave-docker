@@ -14,7 +14,7 @@ if [[ $# -gt 1 ]]; then
   if [[ "$@" != *"-url "* ]]; then
     if [ ! -z "$JENKINS_URL" ]; then
       PARAMS="$PARAMS -url $JENKINS_URL"
-    else if [ ! -z "$JENKINS_SERVICE_HOST" ] && [ ! -z "$JENKINS_SERVICE_PORT" ]; then
+    elif [ ! -z "$JENKINS_SERVICE_HOST" ] && [ ! -z "$JENKINS_SERVICE_PORT" ]; then
       PARAMS="$PARAMS -url http://$JENKINS_SERVICE_HOST:$JENKINS_SERVICE_PORT"
     fi
   fi
@@ -23,12 +23,12 @@ if [[ $# -gt 1 ]]; then
   if [[ "$@" != *"-tunnel "* ]]; then
     if [ ! -z "$JENKINS_TUNNEL" ]; then
       PARAMS="$PARAMS -tunnel $JENKINS_TUNNEL"
-    else if [ ! -z "$JENKINS_SLAVE_SERVICE_HOST" ] && [ ! -z "$JENKINS_SLAVE_SERVICE_PORT" ]; then
+    elif [ ! -z "$JENKINS_SLAVE_SERVICE_HOST" ] && [ ! -z "$JENKINS_SLAVE_SERVICE_PORT" ]; then
       PARAMS="$PARAMS -tunnel $JENKINS_SLAVE_SERVICE_HOST:$JENKINS_SLAVE_SERVICE_PORT"
     fi
   fi
 
-  echo Running java $JAVA_OPTS -jar $JAR $PARAMS "$@"
+  echo Running java $JAVA_OPTS -cp $JAR hudson.remoting.jnlp.Main -headless $PARAMS "$@"
   exec java $JAVA_OPTS -cp $JAR hudson.remoting.jnlp.Main -headless $PARAMS "$@"
 fi
 
