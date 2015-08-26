@@ -1,6 +1,6 @@
-FROM java:8u40-b22-jdk
+FROM java:8u66-jdk
 
-ENV JENKINS_REMOTING_VERSION 2.51
+ENV JENKINS_REMOTING_VERSION 2.52
 ENV HOME /home/jenkins
 
 RUN useradd -c "Jenkins user" -d $HOME -m jenkins
