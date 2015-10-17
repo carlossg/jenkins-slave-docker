@@ -1,6 +1,9 @@
 # Jenkins slave
 
-[`csanchez/jenkins-slave`](https://registry.hub.docker.com/u/csanchez/jenkins-slave/)
+Moved to [`jenkinsci/jnlp-slave`](https://hub.docker.com/r/jenkinsci/jnlp-slave/)
+
+
+[`csanchez/jenkins-slave`](https://hub.docker.com/r/csanchez/jenkins-slave/)
 
 A [Jenkins](https://jenkins-ci.org) slave using JNLP.
 
